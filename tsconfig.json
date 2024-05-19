@@ -2,29 +2,26 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Default",
   "compilerOptions": {
-    "composite": false,
+    "rootDir": "./src",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "allowImportingTsExtensions": true,
-    "inlineSources": false,
     "isolatedModules": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strict": true,
-    "noEmit": true,
     "strictNullChecks": true,
     "lib": ["ES2015"],
     "module": "CommonJS",
     "moduleResolution": "Node",
     "outDir": "./dist",
-    // "target": "es2015"
-    "declaration": false,
-    "declarationMap": false
+    "target": "es2015",
+    "declaration": true,
+    "declarationMap": true
   },
   "exclude": ["node_modules"],
-  "include": ["."],
+  "include": ["src"],
   // "extends": "@repo/typescript-config/base.json",
   "ts-node": {
     "swc": true
