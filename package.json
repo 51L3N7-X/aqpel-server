@@ -24,6 +24,7 @@
     "nodejs-snowflake": "^2.0.1",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
+    "pm2": "^5.3.1",
     "redis": "^4.6.8",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2",
