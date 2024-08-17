@@ -12,11 +12,11 @@
     "skipLibCheck": true,
     "strict": true,
     "strictNullChecks": true,
-    "lib": ["ES2015"],
+    "lib": ["ES2016"],
     "module": "CommonJS",
     "moduleResolution": "Node",
     "outDir": "./dist",
-    "target": "es2015",
+    "target": "ES2016",
     "declaration": true,
     "declarationMap": true
   },

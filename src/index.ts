@@ -36,7 +36,7 @@ import { logger } from "./api/config/logger";
       server.listen({ port: config.port }, () => resolve(undefined))
     );
 
-    // await new SocketServerClass(server).init();
+    await new SocketServerClass(server).init();
 
     logger.info(`Listening to port ${config.port}`);
 

@@ -13,7 +13,7 @@ export class SocketServerClass {
     this.io = new SocketServer(this.server, {
       allowUpgrades: true,
       cors: {
-        origin: "http://localhost:3000",
+        origin: "*",
       },
     });
   }

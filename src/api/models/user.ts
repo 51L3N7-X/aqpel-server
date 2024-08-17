@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema(
     username: {
       type: String,
       required: true,
-      unique: true,
     },
     password: {
       type: String,
@@ -18,7 +17,6 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
       validate: (value: string) => {
         if (!validator.isEmail(value))
           throw new Error("Please insert correct email");
