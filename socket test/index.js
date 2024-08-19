@@ -1,8 +1,8 @@
 // @ts-nocheck
 const { io } = require("socket.io-client");
 
-const user = io("ws://127.0.0.1:6969");
-const waiter = io("ws://127.0.0.1:6969");
+const user = io("wss://api.aqpel.online");
+// const waiter = io("http://127.0.0.1:6969");
 
 // user.on("");
 // user.emit("order:create", { test: 10 });

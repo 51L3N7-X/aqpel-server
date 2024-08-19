@@ -14,3 +14,10 @@ export const updateRestaurantById = async (
   await restaurant.save();
   return restaurant;
 };
+
+export const findRestaurantByName = async (name: string) => {
+  const restaurant = await Restaurant.findOne({ name });
+  if (!restaurant || !Object.keys(restaurant).length)
+    throw new ApiError(httpStatus.NOT_FOUND, "Restaurant not found");
+  return restaurant;
+};

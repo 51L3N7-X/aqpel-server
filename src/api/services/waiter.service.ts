@@ -51,3 +51,21 @@ export const deleteWaiterById = async (id: string, userId: string) => {
   await waiter.deleteOne();
   return waiter;
 };
+
+export const getWaiterByUserNameAndPasswordAndRestaurantId = async (
+  username: string,
+  password: string,
+  restaurantId: string
+) => {
+  const waiter = await Waiter.findOne({
+    username,
+    password,
+    restaurantId,
+  }).select("-userId");
+  if (!waiter || !Object.keys(waiter).length)
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      "The username or password you entered is incorrect. Please try again."
+    );
+  return waiter;
+};

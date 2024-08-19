@@ -5,7 +5,7 @@ import { Token } from "../models/token";
 import { ApiError } from "../utils/ApiError";
 import { config } from "../config/config";
 import { tokenTypes } from "../constants/tokens";
-import mongoose, { ObjectId } from "mongoose";
+import mongoose from "mongoose";
 
 export const generateToken = (
   userId: mongoose.Types.ObjectId,
@@ -95,4 +95,18 @@ export const generateAuthTokens = async (user: any) => {
       expires: refreshTokenExpires.toDate(),
     },
   };
+};
+
+export const generateWaiterToken = (waiterId: mongoose.Types.ObjectId) => {
+  const tokenExpires = moment().add(7, "days");
+  const payload = {
+    sub: waiterId,
+    iat: moment().unix(),
+    exp: tokenExpires.unix(),
+    type: tokenTypes.WAITER,
+  };
+
+  const token = jwt.sign(payload, config.jwt.secret);
+
+  return token;
 };
