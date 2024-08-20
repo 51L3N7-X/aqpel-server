@@ -1,0 +1,43 @@
+components:
+  schemas:
+    Waiter:
+      type: object
+      properties:
+        token:
+          type: string
+        success:
+          type: boolean
+        waiter:
+          type: object
+          properties:
+            id:
+              type: string
+            username:
+              type: string
+            password:
+              type: string
+            restaurantId:
+              type: string
+            tables:
+              type: array
+              items:
+                type: string
+      example:
+        success: true
+        token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmM0ZGZjYzEyN2MzMjIxZTkwMTA3NDAiLCJpYXQiOjE3MjQxNzgzODQsImV4cCI6MTcyNDc4MzE4NCwidHlwZSI6IndhaXRlckFjY2VzcyJ9.CQEMdcBaSNBdfGNRbNwAjqKBZ2dtWAKIA143GTt8uWU
+        waiter:
+          restaurantId: 66c4dfcc127c3221e901073c
+          username: username123
+          password: password123$
+          tables: [66c4dfcc127c3221e901074a, 66c4dfcc127c3221e901072b]
+          id: 66c4dfcc127c3221e9010740
+
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: number
+        message:
+          type: string

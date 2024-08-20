@@ -10,6 +10,7 @@ import { router as publicRouter } from "./public.route";
 import { router as appRouter } from "./app.route";
 import { router as authRouter } from "./auth.route";
 import { router as floorRouter } from "./floor.route";
+import { router as docsRouter } from "./docs.route";
 
 import { getUrl } from "../../controllers/dashboard/getS3Url";
 
@@ -41,6 +42,10 @@ const defaultRouters = [
   {
     path: "/app",
     route: appRouter,
+  },
+  {
+    path: "/docs",
+    route: docsRouter,
   },
   {
     path: "/",

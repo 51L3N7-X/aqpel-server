@@ -302,3 +302,14 @@ export const waiterGetOrDeleteValidate = {
     waiterId: Joi.custom(objectId).required(),
   }),
 };
+
+// App
+
+//waiter
+export const waiterLoginValidate = {
+  body: Joi.object().keys({
+    username: Joi.string().required(),
+    password: Joi.string().required(),
+    restaurant_name: Joi.string().required(),
+  }),
+};

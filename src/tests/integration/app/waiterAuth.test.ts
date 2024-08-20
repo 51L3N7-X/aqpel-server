@@ -34,5 +34,21 @@ describe("Auth routes", () => {
         },
       });
     });
+
+    test("it should return 400 if username or password or restaurant name not entered", async () => {
+      await insertRestaurants([tempRestaurant]);
+      await insertWaiter([tempWaiter]);
+
+      const res = await request(app)
+        .post("/v1/app/waiter/login")
+        .send({
+          username: "",
+          password: "",
+          restaurant_name: "",
+        })
+        .expect(httpStatus.BAD_REQUEST);
+
+      console.log(res.body);
+    });
   });
 });
