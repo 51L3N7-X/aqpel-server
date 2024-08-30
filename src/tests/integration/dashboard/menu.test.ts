@@ -1,5 +1,12 @@
 import { faker } from "@faker-js/faker";
-import { describe, test, expect, beforeEach, jest } from "@jest/globals";
+import {
+  describe,
+  test,
+  expect,
+  beforeEach,
+  jest,
+  beforeAll,
+} from "@jest/globals";
 import {
   insertMenu,
   insertRestaurants,
@@ -7,7 +14,7 @@ import {
   tempRestaurant,
 } from "../../fixtures/restaurant.fixture";
 import request from "supertest";
-import { app } from "../../../api/config/express_config";
+import { Express } from "express";
 import {
   tempUser2AccessToken,
   tempUserAccessToken,
@@ -17,8 +24,15 @@ import { setupDB } from "../../utils/setupDB";
 import { insertUsers, tempUser, tempUser2 } from "../../fixtures/auth.fixture";
 import { Restaurant } from "../../../api/models/restaurant";
 import mongoose from "mongoose";
+import { getTestApp } from "../../utils/setupTestApp";
 
 setupDB();
+
+let app: Express;
+
+beforeAll(async () => {
+  app = await getTestApp();
+});
 
 jest.setTimeout(10000);
 

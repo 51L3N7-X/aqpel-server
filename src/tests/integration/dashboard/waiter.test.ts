@@ -1,7 +1,6 @@
-import { beforeEach, describe, expect, test } from "@jest/globals";
+import { beforeEach, describe, expect, test, beforeAll } from "@jest/globals";
 import { setupDB } from "../../utils/setupDB";
 import request from "supertest";
-import { app } from "../../../api/config/express_config";
 import httpStatus from "http-status";
 import { insertUsers, tempUser, tempUser2 } from "../../fixtures/auth.fixture";
 import {
@@ -15,8 +14,16 @@ import {
 } from "../../fixtures/restaurant.fixture";
 import { insertWaiter, tempWaiter } from "../../fixtures/waiter.fixture";
 import mongoose from "mongoose";
+import { Express } from "express";
+import { getTestApp } from "../../utils/setupTestApp";
 
 setupDB();
+
+let app: Express;
+
+beforeAll(async () => {
+  app = await getTestApp();
+});
 
 describe("Waiter Routes", () => {
   describe("POST /v1/waiter/", () => {

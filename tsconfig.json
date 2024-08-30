@@ -22,7 +22,7 @@
     "declarationMap": true
   },
   "exclude": ["node_modules"],
-  "include": ["src"],
+  "include": ["src", "src/api/routes/v1/public.route.ts"],
   // "extends": "@repo/typescript-config/base.json",
   "ts-node": {
     "swc": true

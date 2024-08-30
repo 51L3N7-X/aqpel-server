@@ -3,6 +3,7 @@ import { VerifiedCallback } from "passport-jwt";
 import { config } from "./config";
 
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
+import { Waiter } from "../models/waiter";
 
 const jwtOptions = {
   secretOrKey: config.jwt.secret,
@@ -11,14 +12,23 @@ const jwtOptions = {
 
 const jwtVerify = async (payload: any, done: VerifiedCallback) => {
   try {
-    if (payload.type !== "access") {
+    if (payload.type !== "access" && payload.type !== "waiterAccess") {
       throw new Error("Invalid token type");
     }
-    const user = await User.findById(payload.sub);
-    if (!user) {
-      return done(null, false);
+
+    if (payload.type == "access") {
+      const user = await User.findById(payload.sub);
+      if (!user) {
+        return done(null, false);
+      }
+      return done(null, user);
+    } else if (payload.type == "waiterAccess") {
+      const waiter = await Waiter.findById(payload.sub);
+      if (!waiter) {
+        return done(null, false);
+      }
+      return done(null, waiter);
     }
-    done(null, user);
   } catch (error) {
     done(error, false);
   }

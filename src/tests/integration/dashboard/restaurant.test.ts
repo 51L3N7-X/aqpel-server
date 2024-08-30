@@ -1,8 +1,7 @@
-import { beforeEach, describe, expect, test } from "@jest/globals";
+import { beforeAll, beforeEach, describe, expect, test } from "@jest/globals";
 import { setupDB } from "../../utils/setupDB";
 import { faker } from "@faker-js/faker";
 import request from "supertest";
-import { app } from "../../../api/config/express_config";
 import httpStatus from "http-status";
 import {
   insertRestaurants,
@@ -13,8 +12,16 @@ import {
   tempUser2AccessToken,
   tempUserAccessToken,
 } from "../../fixtures/token.fixture";
+import { Express } from "express";
+import { getTestApp } from "../../utils/setupTestApp";
 
 setupDB();
+
+let app: Express;
+
+beforeAll(async () => {
+  app = await getTestApp();
+});
 
 describe("Restaurant routes", () => {
   describe("POST /v1/restaurant", () => {

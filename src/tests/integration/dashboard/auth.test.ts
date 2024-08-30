@@ -1,8 +1,8 @@
-import { beforeEach, describe, expect, test } from "@jest/globals";
+import { beforeEach, describe, expect, test, beforeAll } from "@jest/globals";
 import { setupDB } from "../../utils/setupDB";
 import { faker } from "@faker-js/faker";
 import request from "supertest";
-import { app } from "../../../api/config/express_config";
+import { Express } from "express";
 import httpStatus from "http-status";
 import { User } from "../../../api/models/user";
 import { insertUsers, tempUser } from "../../fixtures/auth.fixture";
@@ -12,8 +12,15 @@ import { generateToken } from "../../../api/services/token.service";
 import { tokenTypes } from "../../../api/constants/tokens";
 import { tokenService } from "../../../api/services";
 import { Token } from "../../../api/models/token";
+import { getTestApp } from "../../utils/setupTestApp";
 
 setupDB();
+
+let app: Express;
+
+beforeAll(async () => {
+  app = await getTestApp();
+});
 
 describe("Auth routes", () => {
   describe("POST /v1/auth/register", () => {

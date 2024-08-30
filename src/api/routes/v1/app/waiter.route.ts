@@ -1,29 +1,24 @@
 import express from "express";
 export const router = express.Router();
 
-// import { login } from "../../controllers/app/login.controller";
-import { getOrders } from "../../controllers/app/getOrders.controller";
+import { getOrders } from "../../../controllers/app/order.controller.app.waiter";
+import { getTables } from "../../../controllers/app/getTables.controller";
+import { auth } from "../../../middlewares/auth";
+import { login } from "../../../controllers/app/auth.controller.app.waiter";
+import { validate } from "../../../middlewares/validate";
+import { waiterLoginValidate } from "../../../validations/public";
 
-import { getTables } from "../../controllers/app/getTables.controller";
-import { auth } from "../../middlewares/auth";
-import { login } from "../../controllers/app/auth.controller.app.waiter";
-import { validate } from "../../middlewares/validate";
-import { waiterLoginValidate } from "../../validations/public";
-
-// router.post("/login", login);
-
-router.post("/waiter/login", validate(waiterLoginValidate), login);
+router.post("/login", validate(waiterLoginValidate), login);
 
 router.use(auth());
 
-router.get("/getOrders", getOrders);
-router.get("/getTables", getTables);
+router.get("/orders", getOrders);
 
 /**
  * @swagger
  * tags:
- *   name: Auth
- *   description: Authentication
+ *   name: Waiter
+ *   description: Waiter routes
  */
 
 /**
@@ -31,7 +26,7 @@ router.get("/getTables", getTables);
  * /app/waiter/login:
  *   post:
  *     summary: Login
- *     tags: [Auth]
+ *     tags: [Waiter]
  *     requestBody:
  *       required: true
  *       content:
@@ -87,4 +82,41 @@ router.get("/getTables", getTables);
  *               errors:
  *                 - message: "'username' is not allowed to be empty"
  *                   type: "username"
+ */
+
+/**
+ * @swagger
+ * /app/waiter/orders:
+ *   get:
+ *     summary: Get Orders
+ *     tags: [Waiter]
+ *     security:
+ *       - Auth: []
+ *     responses:
+ *       200:
+ *         description: Ok
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: "#/components/schemas/Order"
+ *             examples:
+ *               example-1:
+ *                 summary: A sample order
+ *                 value:
+ *                   - id: "66d1fffa0a22fe3588819066"
+ *                     type: "waiter"
+ *                     order_details:
+ *                       items:
+ *                         - name: "Spaghetti Carbonara"
+ *                           count: 2
+ *                           image_url: "https://example.com/images/spaghetti-carbonara.jpg"
+ *                         - name: "Caesar Salad"
+ *                           count: 1
+ *                           image_url: "https://example.com/images/caesar-salad.jpg"
+ *                     restaurant_id: "66d1fff90a22fe358881904e"
+ *                     table_id: "66d1fff90a22fe3588819049"
+ *                     done: false
+ *                     table_number: 12
  */

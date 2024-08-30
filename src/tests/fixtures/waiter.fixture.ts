@@ -3,6 +3,7 @@ import { tempUser } from "./auth.fixture";
 import { faker } from "@faker-js/faker";
 import { Waiter } from "../../api/models/waiter";
 import { tempRestaurant } from "./restaurant.fixture";
+import { tempTable } from "./table.fixture";
 
 export const tempWaiter = {
   username: "username123",
@@ -12,6 +13,15 @@ export const tempWaiter = {
   restaurantId: tempRestaurant._id,
 };
 
+export const tempWaiterWithTables = {
+  ...tempWaiter,
+  tables: [tempTable._id],
+};
+
 export const insertWaiter = async (waiters: any[]) => {
+  await Waiter.insertMany(waiters);
+};
+
+export const insertWaiterWithTables = async (waiters: any[]) => {
   await Waiter.insertMany(waiters);
 };

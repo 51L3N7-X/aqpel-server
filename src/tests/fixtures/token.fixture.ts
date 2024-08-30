@@ -4,6 +4,7 @@ import { tokenService } from "../../api/services";
 import { tempUser, tempUser2 } from "./auth.fixture";
 import { tokenTypes } from "../../api/constants/tokens";
 import mongoose, { ObjectId } from "mongoose";
+import { tempWaiter, tempWaiterWithTables } from "./waiter.fixture";
 
 const accessTokenExpires = moment().add(
   config.jwt.accessExpirationMinutes,
@@ -20,4 +21,8 @@ export const tempUser2AccessToken = tokenService.generateToken(
   tempUser2._id,
   accessTokenExpires,
   tokenTypes.ACCESS
+);
+
+export const tempWaiterAccessToken = tokenService.generateWaiterToken(
+  tempWaiterWithTables._id
 );

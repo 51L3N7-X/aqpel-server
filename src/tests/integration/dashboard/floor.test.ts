@@ -1,8 +1,8 @@
-import { beforeEach, describe, expect, test } from "@jest/globals";
+import { beforeAll, beforeEach, describe, expect, test } from "@jest/globals";
 import { setupDB } from "../../utils/setupDB";
 import { faker } from "@faker-js/faker";
 import request from "supertest";
-import { app } from "../../../api/config/express_config";
+import { Express } from "express";
 import httpStatus from "http-status";
 import { insertUsers, tempUser, tempUser2 } from "../../fixtures/auth.fixture";
 import {
@@ -11,8 +11,15 @@ import {
 } from "../../fixtures/token.fixture";
 import { insertTheFloor, tempFloor } from "../../fixtures/floor.fixture";
 import mongoose from "mongoose";
+import { getTestApp } from "../../utils/setupTestApp";
 
 setupDB();
+
+let app: Express;
+
+beforeAll(async () => {
+  app = await getTestApp();
+});
 
 describe("Floor Routes", () => {
   describe("POST /v1/floor", () => {

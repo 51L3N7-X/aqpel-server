@@ -2,6 +2,7 @@ import httpStatus from "http-status";
 import { Waiter } from "../models/waiter";
 import { ApiError } from "../utils/ApiError";
 import { Restaurant } from "../models/restaurant";
+import { Order } from "../models/order";
 
 export const createWaiter = async (body: Waiter) => {
   const restaurant = await Restaurant.findOne({
@@ -68,4 +69,14 @@ export const getWaiterByUserNameAndPasswordAndRestaurantId = async (
       "The username or password you entered is incorrect. Please try again."
     );
   return waiter;
+};
+
+export const getOrdersByWaiterId = async (_id: string) => {
+  const waiter = await Waiter.findOne({ _id });
+  if (!waiter) throw new ApiError(404, "Waiter not found");
+  const orders = await Order.find({
+    table_id: { $in: waiter.tables },
+    done: false,
+  }).sort({ createdAt: 1 });
+  return orders;
 };
