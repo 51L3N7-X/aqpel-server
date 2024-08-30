@@ -1,10 +1,8 @@
 import express from "express";
 import cors from "cors";
 import multer from "multer";
-import { successHandler } from "./morgan";
-import { errorHandler as morganErrorHandler } from "./morgan";
+import { successHandler, errorHandler as morganErrorHandler } from "./morgan";
 import { config } from "./config";
-import { initializeRouter } from "../routes/v1/index";
 import passport from "passport";
 import { jwtStrategy } from "./passport_config";
 import parser from "body-parser";
@@ -12,6 +10,7 @@ import { errorConverter, errorHandler } from "../middlewares/error";
 import httpStatus from "http-status";
 import { ApiError } from "../utils/ApiError";
 import expressListEndpoints from "express-list-endpoints";
+import { initializeRouter } from "../routes/v1/index";
 
 export const initApp = async () => {
   const app = express();
@@ -30,10 +29,10 @@ export const initApp = async () => {
   app.use(passport.initialize());
   passport.use("jwt", jwtStrategy);
 
-  const router = await initializeRouter(); // Wait for the router to initialize
+  const router = await initializeRouter();
   app.use("/v1", router);
 
-  if (config.env == "development") {
+  if (config.env === "development") {
     expressListEndpoints(app).forEach((endpoint) => {
       console.log(endpoint.path);
     });
@@ -44,7 +43,6 @@ export const initApp = async () => {
   });
 
   app.use(errorConverter);
-
   app.use(errorHandler);
 
   return app;
