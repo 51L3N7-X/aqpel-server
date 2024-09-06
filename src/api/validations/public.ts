@@ -5,18 +5,6 @@ import Joi from "joi";
 
 // const test = Joi.extend(JoiPhone);
 
-export const orderValidate = {
-  body: Joi.object().keys({
-    type: Joi.string().required().valid("order", "waiter", "ember", "bill"),
-    restaurant_id: Joi.string().required(),
-    table_id: Joi.string().required().custom(objectId),
-    // table_number: Joi.number().required(),
-    order_details: Joi.object({
-      price: Joi.string().required(),
-    }).optional(),
-  }),
-};
-
 //register
 export const registerValidate = {
   body: Joi.object().keys({
@@ -24,6 +12,18 @@ export const registerValidate = {
     email: Joi.string().required().email(),
     password: Joi.string().required().custom(password),
     // phone: test.string().phoneNumber({ format: "e164" }).required(),
+  }),
+};
+
+export const orderValidate = {
+  body: Joi.object().keys({
+    type: Joi.string().required().valid("order", "waiter", "ember", "bill"),
+    restaurant_id: Joi.string().required().custom(objectId),
+    table_id: Joi.string().required().custom(objectId),
+    table_number: Joi.number().required(),
+    order_details: Joi.object({
+      price: Joi.string().required(),
+    }).optional(),
   }),
 };
 

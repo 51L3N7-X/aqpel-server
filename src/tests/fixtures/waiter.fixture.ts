@@ -11,6 +11,7 @@ export const tempWaiter = {
   _id: new mongoose.Types.ObjectId(),
   userId: tempUser._id,
   restaurantId: tempRestaurant._id,
+  name: faker.person.firstName(),
 };
 
 export const tempWaiterWithTables = {

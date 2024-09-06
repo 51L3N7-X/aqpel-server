@@ -4,7 +4,7 @@ import { tempTable } from "./table.fixture";
 import { Order } from "../../api/models/order";
 
 export const temp_order_with_waiter_type = {
-  //   _id: new mongoose.Types.ObjectId(),
+  _id: new mongoose.Types.ObjectId(),
   type: "waiter",
   restaurant_id: tempRestaurant._id,
   table_id: tempTable._id,
