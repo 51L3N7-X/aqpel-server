@@ -20,7 +20,6 @@ const connection = (socket: Socket, io: any) => {
   socket.on("order:create", async (order: OrderType) => {
     // console.log(order);
     try {
-      joiValidate(orderValidate, order);
       // const { value, error } = Joi.compile(orderSchema.body)
       //   .prefs({ errors: { label: "key" } })
       //   .validate(order);

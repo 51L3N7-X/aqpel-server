@@ -17,7 +17,7 @@ export const registerValidate = {
 
 export const orderValidate = {
   body: Joi.object().keys({
-    type: Joi.string().required().valid("order", "waiter", "ember", "bill"),
+    type: Joi.string().required().valid("order", "waiter", "embers", "bill"),
     restaurant_id: Joi.string().required().custom(objectId),
     table_id: Joi.string().required().custom(objectId),
     table_number: Joi.number().required(),

@@ -19,7 +19,7 @@ export const getOrderById = async (orderId: string) => {
 };
 
 export const updateOrderById = async (orderId: string, updateBody: any) => {
-  const order = await getOrderById(orderId);
+  const order = await getOrderById(String(orderId));
   if (!order) {
     throw new Error("Order not found");
   }
