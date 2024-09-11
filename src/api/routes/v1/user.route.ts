@@ -8,6 +8,7 @@ import {
 } from "../../controllers/dashboard/user.controller";
 
 import { auth } from "../../middlewares/auth";
+import { getUrl } from "../../controllers/dashboard/getS3Url";
 
 //verify
 router.use(auth());
@@ -16,3 +17,4 @@ router.use(auth());
 router.get("/", getUser);
 router.patch("/", modifyUser);
 router.delete("/", deleteUser);
+router.get("/getUploadURL", getUrl);
