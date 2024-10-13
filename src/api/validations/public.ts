@@ -1,14 +1,21 @@
-import { objectId, password } from "./utils/custom";
+import { objectId, password, username } from "./utils/custom";
 
 import Joi from "joi";
 // import JoiPhone from "joi-phone-number";
 
 // const test = Joi.extend(JoiPhone);
 
+export const updaterUserValidate = {
+  body: Joi.object().keys({
+    username: Joi.string().custom(username).min(3).max(20).trim(),
+    name: Joi.string().max(30),
+    password: Joi.forbidden(),
+  }),
+};
 //register
 export const registerValidate = {
   body: Joi.object().keys({
-    username: Joi.string().required().min(3).max(20).trim().lowercase(),
+    username: Joi.string().required().custom(username).min(3).max(20).trim(),
     email: Joi.string().required().email(),
     password: Joi.string().required().custom(password),
     // phone: test.string().phoneNumber({ format: "e164" }).required(),
@@ -275,7 +282,7 @@ export const tableDeleteValidate = {
 
 export const waiterCreateValidate = {
   body: Joi.object().keys({
-    username: Joi.string().required().trim().min(3).max(25).lowercase(),
+    username: Joi.string().required().custom(username).min(3).max(20).trim(),
     password: Joi.custom(password).required(),
     name: Joi.string().trim(),
     photoUrl: Joi.string(),
@@ -287,7 +294,7 @@ export const waiterCreateValidate = {
 
 export const waiterModifyValidate = {
   body: Joi.object().keys({
-    username: Joi.string().trim().min(3).max(25).lowercase(),
+    username: Joi.string().custom(username).min(3).max(20).trim(),
     password: Joi.custom(password),
     name: Joi.string().trim(),
     photoUrl: Joi.string(),

@@ -4,12 +4,15 @@
  * @param {string[]} keys
  * @returns {Object}
  */
-export const pick = (object: any, keys: any[]) => {
+export const pick = (
+  object: Record<string, any>,
+  keys: string[]
+): Record<string, any> => {
   return keys.reduce((obj, key) => {
     if (object && Object.prototype.hasOwnProperty.call(object, key)) {
       // eslint-disable-next-line no-param-reassign
       obj[key] = object[key];
     }
     return obj;
-  }, {});
+  }, {} as Record<string, any>);
 };

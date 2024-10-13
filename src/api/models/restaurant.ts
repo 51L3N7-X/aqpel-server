@@ -17,6 +17,9 @@ const restaurantSchema = new mongoose.Schema({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Menu" }],
     private: true,
   },
+  defaultMenu: {
+    type: { type: mongoose.Schema.Types.ObjectId },
+  },
 });
 
 restaurantSchema.plugin(toJSON);

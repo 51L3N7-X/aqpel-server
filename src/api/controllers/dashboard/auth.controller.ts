@@ -49,8 +49,7 @@ export const register = catchAsync(
     if (req.headers.authorization)
       throw new ApiError(httpStatus.BAD_REQUEST, "Authenticated");
 
-    const { email, password, username, phone, location, code } =
-      req.body as any;
+    const { email, username } = req.body as any;
 
     const errors = [];
     if (await User.isEmailTaken(email)) {

@@ -9,12 +9,13 @@ import {
 
 import { auth } from "../../middlewares/auth";
 import { getUrl } from "../../controllers/dashboard/getS3Url";
-
+import { validate } from "../../middlewares/validate";
+import { updaterUserValidate } from "../../validations/public";
 //verify
 router.use(auth());
 
 // main requests for user
 router.get("/", getUser);
-router.patch("/", modifyUser);
+router.patch("/", validate(updaterUserValidate), modifyUser);
 router.delete("/", deleteUser);
 router.get("/getUploadURL", getUrl);

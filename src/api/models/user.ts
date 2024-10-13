@@ -22,6 +22,8 @@ const userSchema = new mongoose.Schema(
           throw new Error("Please insert correct email");
       },
     },
+    name: String,
+    photoURL: String,
     // phone: {
     //   type: String,
     //   unique: true,

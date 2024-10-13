@@ -23,4 +23,27 @@ export const password = (value: string, helpers: CustomHelpers) => {
   return value;
 };
 
+export const username = (value: string, helpers: CustomHelpers) => {
+  // Allow only lowercase letters, numbers, and underscores
+  const regex = /^[a-z0-9_]+$/;
+
+  // Check for invalid characters (anything that is not lowercase letters, numbers, or _)
+  if (!regex.test(value)) {
+    return helpers.message({
+      custom:
+        "Username can only contain lowercase letters, numbers, and underscores.",
+    });
+  }
+
+  // Check for whitespace
+  if (/\s/.test(value)) {
+    return helpers.message({
+      custom: "Username cannot contain whitespace.",
+    });
+  }
+
+  // Return the value if all checks pass
+  return value;
+};
+
 // export const phone = (value: string, helpers: CustomHelpers) => {};
