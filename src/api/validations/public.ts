@@ -112,7 +112,7 @@ export const restaurantUpdateValidate = {
     currency: Joi.string(),
     description: Joi.string(),
     menus: Joi.forbidden(),
-    imageUrl: Joi.string(),
+    imageURL: Joi.string(),
   }),
 };
 
