@@ -10,6 +10,7 @@ export const updaterUserValidate = {
     username: Joi.string().custom(username).min(3).max(20).trim(),
     name: Joi.string().max(30),
     password: Joi.forbidden(),
+    photoURL: Joi.string(),
   }),
 };
 //register

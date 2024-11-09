@@ -19,7 +19,7 @@ const restaurantSchema = new mongoose.Schema({
     private: true,
   },
   defaultMenu: {
-    type: { type: mongoose.Schema.Types.ObjectId },
+    type: mongoose.Schema.Types.ObjectId,
   },
 });
 

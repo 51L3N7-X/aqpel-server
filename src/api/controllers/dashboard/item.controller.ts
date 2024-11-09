@@ -19,6 +19,7 @@ export const addItem = catchAsync(
       userId: req.user.id,
       categoryId: req.params.categoryId,
       restaurantId: req.params.restaurantId,
+      menuId: req.params.menuId,
       ...req.body,
     });
 

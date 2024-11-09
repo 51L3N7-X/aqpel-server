@@ -15,6 +15,10 @@ export const addMenu = catchAsync(
 
     if (!restaurant) throw new ApiError(404, "Restaurant not found.");
 
+    const count = await Menu.countDocuments();
+
+    if (count > 0) throw new ApiError(404, "Menu Created Already");
+
     const menu = await new Menu({
       restaurantId: req.params.restaurantId,
       userId: req.user.id,
@@ -22,6 +26,7 @@ export const addMenu = catchAsync(
     });
 
     restaurant.menus.push(menu._id);
+    restaurant.defaultMenu = menu._id;
 
     await menu.save();
     await restaurant.save();
