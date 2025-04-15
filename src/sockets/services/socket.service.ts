@@ -9,3 +9,4 @@ export const subscribe = (socket: Socket, roomId: string | string[]) => {
   // io.to("test").emit("ttt", "hello");
   console.log("joined room", roomId);
 };
+

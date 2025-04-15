@@ -1,6 +1,6 @@
 export interface Order {
   // from user is waiter or bill or embers
-  type: string | "embers" | "waiter" | "bill" | "order" | "kitchen";
+  type: string | "embers" | "waiter" | "bill" | "order" | "kitchen" | "cancel";
   restaurant_id: string;
   table_id: string;
   order_deatils: {
